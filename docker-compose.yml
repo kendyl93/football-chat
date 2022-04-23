@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ./src:/src
+      - ./nodemon.json:/nodemon.json
+    container_name: server
+    expose:
+      - '3001'
+    ports:
+      - '3001:3001'
+    command: npm run dev
