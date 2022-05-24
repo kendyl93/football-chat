@@ -8,3 +8,10 @@
 - `docker ps` - get container id
 - `docker exec -it [CONTAINER_ID] /bin/bash` - go into the container
 - `docker kill [CONTAINER_ID]` - kill docker container
+
+
+# TODO
+- dockerizing mongodb
+- invastigate how to connect db with socket chat
+- create db doc on app request
+- use TTL to remove db doc after some time
