@@ -5,13 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /app
+      target: base
     volumes:
-      - ./src:/src
-      - ./nodemon.json:/nodemon.json
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
     container_name: server
     expose:
-      - '3001'
+      - '4000'
     ports:
-      - '3001:3001'
+      - '4000:4000'
     command: npm run dev
