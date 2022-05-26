@@ -9,9 +9,22 @@
 - `docker exec -it [CONTAINER_ID] /bin/bash` - go into the container
 - `docker kill [CONTAINER_ID]` - kill docker container
 
+# Database
+
+Run mongo locally:
+
+0. Install mongo
+1. `sudo mkdir -p /System/Volumes/Data/data/db` - create `/data/db` path
+2. ``sudo chown -R `id -un` /System/Volumes/Data/data/db`` - Add permissions
+3. `brew services run mongodb-community` - Start mongodb
+4. `brew services list` - check running services
+5. `mongo` - Enter inside mongo shell
+
+STOP DB: `brew services stop mongodb-community`
 
 # TODO
-- dockerizing mongodb
+
+- dockerize local mongodb
 - invastigate how to connect db with socket chat
 - create db doc on app request
 - use TTL to remove db doc after some time

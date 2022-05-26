@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const app: Application = express()
 
-mongoose.connect('mongodb+srv://pawel:pawelstanecki@cluster0.aj5yl.mongodb.net/test');
+mongoose.connect('mongodb://mongodb:27017/chats'); // localhost without the docker and change port
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
