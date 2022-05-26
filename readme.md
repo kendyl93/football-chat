@@ -24,7 +24,7 @@ STOP DB: `brew services stop mongodb-community`
 
 # TODO
 
-- dockerize local mongodb
+- dockerize local mongodb - DONE
+- flow - Create chat ROOM in the db and connect users to it. Then send messages like [{ userName: string, message: 'string'}]
 - invastigate how to connect db with socket chat
-- create db doc on app request
 - use TTL to remove db doc after some time
