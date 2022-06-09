@@ -1,22 +1,20 @@
-import express, { Application, Request, Response } from 'express'
-import mongoose from 'mongoose';
+import express from 'express';
+import mongoose from 'mongoose'
+import { json } from 'body-parser';
+import { chatRouter } from './routes/chat'
 
-const app: Application = express()
+const app = express()
+app.use(json())
+app.use(chatRouter)
 
-mongoose.connect('mongodb://mongodb:27017/chats'); // localhost without the docker and change port
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function () {
-    console.log("Connected successfully");
-});
-
-const port: number = 4000
-
-app.get('/toto', (req: Request, res: Response) => {
-    res.send('Hello toto change asd UUU');
+mongoose.connect('mongodb://localhost:27017/chat', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}, () => {
+    console.log('connected to database')
 })
 
-app.listen(port, function () {
-    console.log(`App is listen on port ${port} !`)
+app.listen(3000, () => {
+    console.log('server is listening on port 3000')
 })
