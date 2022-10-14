@@ -1,11 +1,15 @@
-FROM node:latest
-#Copying current dir into container file system 
-COPY . /app
-#setting working directory in the container
-WORKDIR /app
-# installing the dependencies into the container
+FROM node:16.18.0-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json \ 
+    tsconfig.json \
+    /usr/src/app/
+
 RUN npm install
-#container exposed network port number
-EXPOSE 3000
-#command to run within the container
+
+COPY src/ src/
+
+EXPOSE 4000
+
 CMD npm run start
