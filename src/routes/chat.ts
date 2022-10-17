@@ -3,6 +3,11 @@ import { Chat } from '../models/chat'
 
 const router = express.Router()
 
+router.get('/api', async (req: Request, res: Response) => {
+  // const chat = await Chat.find({})
+  return res.status(200).send('working')
+})
+
 router.get('/api/chat', async (req: Request, res: Response) => {
   const chat = await Chat.find({})
   return res.status(200).send(chat)
