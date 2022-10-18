@@ -5,13 +5,28 @@ services:
     build:
       context: './'
       target: dev
+    env_file: ./.env
     volumes: 
       - .:/usr/src/app
     command: npm run start:dev
     ports:
       - "4001:4001"
     environment:
-      NODE_ENV: development
+      - NODE_ENV=$NODE_ENV
+      - DB_HOST=$DB_HOST
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+      - DB_PORT=$DB_PORT
+      - SERVER_PORT=$SERVER_PORT
+  mongo:
+    image: mongo:6.0
+    env_file: ./.env
+    ports:
+      - $DB_PORT:$DB_PORT
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$DB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
 
 
     

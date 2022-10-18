@@ -6,7 +6,7 @@ COPY package*.json \
     tsconfig.json \
     /usr/src/app/
 
-EXPOSE 4000
+EXPOSE 4001
 
 FROM base as production
 ENV NODE_ENV=production

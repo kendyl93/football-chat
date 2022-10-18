@@ -23,8 +23,7 @@ STOP DB: `brew services stop mongodb-community`
 
 # TODO
 
-- dockerize local mongodb - NOT DONE
-- add env variables
+- connect jenkins and push to the server
 - flow - Create chat ROOM in the db and connect users to it. Then send messages like [{ userName: string, message: 'string'}]
 - invastigate how to connect db with socket chat
 - use TTL to remove db doc after some time
