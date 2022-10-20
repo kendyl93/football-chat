@@ -1,0 +1,11 @@
+services:
+ - type: web
+    name: server
+    env: docker
+    region: frankfurt # optional (defaults to oregon)
+- type: pserv
+    name: mongodb
+    env: docker
+    disk:
+      name: data
+      mountPath: /data/db
