@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
 
-interface IChat {
+interface IChatRoom {
   title: string;
   description: string;
 }
 
 interface chatModelInterface extends mongoose.Model<ChatDoc> {
-  build(options: IChat): ChatDoc
+  build(options: IChatRoom): ChatDoc
 }
 
 interface ChatDoc extends mongoose.Document {
@@ -25,7 +25,7 @@ const chatSchema = new mongoose.Schema({
   }
 })
 
-chatSchema.statics.build = (options: IChat) => {
+chatSchema.statics.build = (options: IChatRoom) => {
   return new Chat(options)
 }
 

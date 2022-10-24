@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { Chat } from '../models/chat'
+import { Chat } from '../models/chatRoom'
 
 const router = express.Router()
 
