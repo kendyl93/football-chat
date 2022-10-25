@@ -7,6 +7,7 @@ import { initServer } from './server/init'
 import { dbString, dbOptions } from './database/constants'
 
 const app = express()
+
 app.use(json())
 app.use(chatRouter)
 

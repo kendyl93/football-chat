@@ -7,5 +7,6 @@ export const ENVIRONMENT: ENV = {
     DB_USER: process.env.DB_USER as string,
     DB_PASSWORD: process.env.DB_PASSWORD as string,
     DB_PORT: process.env.DB_PORT as string,
-    SERVER_PORT: process.env.SERVER_PORT as string
+    SERVER_PORT: process.env.SERVER_PORT as string,
+    FOOTBALL_DATA_API_TOKEN: process.env.FOOTBALL_DATA_API_TOKEN as string
 }
