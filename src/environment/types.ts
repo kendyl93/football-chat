@@ -9,4 +9,6 @@ export interface ENV {
     DB_PORT: string;
     SERVER_PORT: string;
     FOOTBALL_DATA_API_TOKEN: string;
+    REDIS_URL: string;
+    FOOTBALL_API_DATA_URL: string;
 }
