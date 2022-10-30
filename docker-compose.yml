@@ -14,19 +14,20 @@ services:
     environment:
       - NODE_ENV=$NODE_ENV
       - DB_HOST=$DB_HOST
-      - DB_USER=$DB_USER
-      - DB_PASSWORD=$DB_PASSWORD
+      # - DB_USER=$DB_USER
+      # - DB_PASSWORD=$DB_PASSWORD
       - DB_NAME=$DB_NAME
       - DB_PORT=$DB_PORT
+      - DB_LOCAL_PORT=$DB_LOCAL_PORT
       - SERVER_PORT=$SERVER_PORT
   mongo:
     image: mongo:6.0
     env_file: ./.env
     ports:
-      - $DB_PORT:$DB_PORT
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$DB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
+      - $DB_LOCAL_PORT:$DB_PORT
+    # environment:
+      # - MONGO_INITDB_ROOT_USERNAME=$DB_USER
+      # - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
   redis:
     image: redis:7.0.5-alpine
     ports:

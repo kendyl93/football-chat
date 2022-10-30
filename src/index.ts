@@ -11,4 +11,11 @@ const app = express()
 app.use(json())
 app.use(chatRouter)
 
-mongoose.connect(dbString, dbOptions, initServer(app))
+mongoose.connect(dbString, dbOptions, async (error) => {
+    console.log(`[DB]: ${dbString}`)
+    if (error) {
+        console.log(`[DB ERROR]: ${error}`)
+    }
+
+    await initServer(app)
+})
