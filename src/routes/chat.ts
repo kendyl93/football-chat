@@ -1,9 +1,12 @@
 import express from 'express'
 import { chatController } from '../controllers/chatRoom'
+import { chatMessageController } from '../controllers/chatMessage'
 
 const router = express.Router()
 
 router.get('/api', chatController.getMatches)
+router.post('/api/message', chatMessageController.postMessage)
+router.get('/api/message', chatMessageController.getMessage)
 
 // router.get('/api/chat', async (req: Request, res: Response) => {
 //   const chat = await Chat.find({})
