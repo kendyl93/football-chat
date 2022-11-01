@@ -1,6 +1,5 @@
 import express from 'express'
-import { Chat } from '../models/chatRoom'
-import { chatController } from '../controllers/chat'
+import { chatController } from '../controllers/chatRoom'
 
 const router = express.Router()
 

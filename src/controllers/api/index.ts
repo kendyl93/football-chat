@@ -1,0 +1,25 @@
+import { ChatRoom } from '../../models/chatRoom';
+import { Match } from './types';
+
+const postOrDeleteMatches = async (matches: Match[]): Promise<void> => {
+    matches?.map(async (match: Match) => {
+        console.log({ ID: match.id })
+
+        const teams = `${match.homeTeam.name} - ${match.awayTeam.name}`;
+        console.log({ teams })
+
+        const chatRoom = new ChatRoom({ matchId: match.id, teams });
+
+        const query = { matchId: match.id };
+        const matchExist = await ChatRoom.exists(query);
+
+        if (!matchExist) {
+            chatRoom.save();
+        }
+
+    })
+}
+
+export {
+    postOrDeleteMatches
+}

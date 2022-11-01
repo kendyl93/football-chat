@@ -1,6 +1,4 @@
-import { client } from '../server/init'
-
-const getUnfinishedMatches = (matches: any[]) => matches.filter((match: any) => match.status !== 'FINISHED')
+import { client } from '../../server/init'
 
 // any as a temporary workaround
 const getMatches = async (req: any, res: any) => {
@@ -21,6 +19,7 @@ const getMatches = async (req: any, res: any) => {
     }
 
 }
+
 
 export const chatController = {
     getMatches

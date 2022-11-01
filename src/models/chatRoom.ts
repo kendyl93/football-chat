@@ -1,42 +1,26 @@
-import mongoose from 'mongoose'
+import mongoose, { model, Schema } from 'mongoose'
+
+const ONE_HOUR_IN_SEDCONDS = 3600;
 
 interface IChatRoom {
-  title: string;
-  description: string;
+  name: string;
+  matchId: number;
+  expireAt: Date;
 }
 
-interface chatModelInterface extends mongoose.Model<ChatDoc> {
-  build(options: IChatRoom): ChatDoc
-}
-
-interface ChatDoc extends mongoose.Document {
-  title: string;
-  description: string;
-}
-
-const chatSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
+const chatRoomSchema = new Schema<IChatRoom>({
+  teams: { type: String, required: true },
+  matchId: { type: Number, required: true },
+  expireAt: {
+    type: Date,
+    expires: ONE_HOUR_IN_SEDCONDS,
+    default: Date.now
   }
-})
+});
 
-chatSchema.statics.build = (options: IChatRoom) => {
-  return new Chat(options)
-}
+const ChatRoom = model<IChatRoom>('ChatRoom', chatRoomSchema)
 
-const Chat = mongoose.model<ChatDoc, chatModelInterface>('Chat', chatSchema)
-
-Chat.build({
-  title: 'some title',
-  description: 'some description'
-})
-
-export { Chat }
+export { ChatRoom }
 
 
 
