@@ -3,10 +3,7 @@ import { Match } from './types';
 
 const postOrDeleteMatches = async (matches: Match[]): Promise<void> => {
     matches?.map(async (match: Match) => {
-        console.log({ ID: match.id })
-
         const teams = `${match.homeTeam.name} - ${match.awayTeam.name}`;
-        console.log({ teams })
 
         const chatRoom = new ChatRoom({ matchId: match.id, teams });
 

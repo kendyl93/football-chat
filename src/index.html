@@ -2,6 +2,9 @@
 <html>
 <head>
  <! — include bootstap and jquery cdn →
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+ <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -20,23 +23,23 @@
  
 </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
+   var socket = io();
     $(() => {
         $("#send").click(()=>{
-           sendMessage({
-              name: $("#name").val(), 
-              message:$("#message").val()});
-            })
-          getMessages()
+            sendMessage({name: $("#name").val(), message: $("#message").val()});
         })
-        
+
+        getMessages()
+    })
+
+    socket.on('message', addMessages)
+
     function addMessages(message){
-       $("#messages").append(`
-          <h4> ${message.name} </h4>
-          <p>  ${message.message} </p>`)
-       }
-       
+       console.log({message})
+      $("#messages").append(`<h4> ${message.name} </h4> <p> ${message.message} </p>`)
+   }
+
     function getMessages(){
       $.get("http://localhost:4001/api/message", (data) => {
        data.forEach(addMessages);

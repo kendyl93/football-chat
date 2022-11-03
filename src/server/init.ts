@@ -4,7 +4,6 @@ import { createClient } from 'redis'
 import { ChatRoom } from '../models/chatRoom';
 import { postOrDeleteMatches } from '../controllers/api'
 
-
 export const client = createClient({ url: ENVIRONMENT.REDIS_URL });
 
 const TEN_SECONDS_IN_MILISECONDS = 10 * 1000
@@ -30,19 +29,15 @@ const getAPIData = async () => {
 
         setInterval(async () => {
             try {
-                const response = await axios.get(`${ENVIRONMENT.FOOTBALL_API_DATA_URL}matches?status=LIVE`, { headers: { 'X-Auth-Token': ENVIRONMENT.FOOTBALL_DATA_API_TOKEN } })
+                const response = await axios.get(`${ENVIRONMENT.FOOTBALL_API_DATA_URL}matches`, { headers: { 'X-Auth-Token': ENVIRONMENT.FOOTBALL_DATA_API_TOKEN } })
                 client.set('matches', JSON.stringify(response.data));
 
                 // Create documents if not exist
                 response.data?.matches?.map(async (match: any) => {
-                    console.log({ ID: match.id })
-                    console.log({ teams: `${match.homeTeam.name} - ${match.awayTeam.name}` })
-
                     const chatRoom = new ChatRoom({ matchId: match.id, teams: `${match.homeTeam.name} - ${match.awayTeam.name}` });
 
                     const query = { matchId: match.id };
                     const matchExist = await ChatRoom.exists(query);
-                    console.log({ matchExist })
 
                     if (!matchExist) {
                         chatRoom.save().then(() => console.log('meow')).catch(err => console.log(err));
