@@ -3,7 +3,7 @@ import { ChatMessage } from "../../models/chatMessage";
 const postMessage = async (req: any, res: any): Promise<void> => {
     const message = new ChatMessage(req.body);
 
-    message.save().then(() => {
+    message.save({ timestamps: false }).then(() => {
         console.log('message saved')
     }).catch(() => console.log('FAILED'))
 };

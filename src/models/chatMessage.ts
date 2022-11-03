@@ -1,7 +1,5 @@
 import mongoose, { model, Schema } from 'mongoose'
 
-const ONE_HOUR_IN_SEDCONDS = 3600;
-
 interface IChatMessage {
   name: string;
   message: string;
@@ -10,6 +8,7 @@ interface IChatMessage {
 const chatMessageSchema = new Schema<IChatMessage>({
   name: { type: String, required: true },
   message: { type: String, required: true },
+  createdAt: { type: Number, default: Date.now() }
 });
 
 const ChatMessage = model<IChatMessage>('ChatMessage', chatMessageSchema)
