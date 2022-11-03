@@ -1,7 +1,8 @@
+import { ChatRoom } from '../../models/chatRoom';
 import { client } from '../../server/init'
 
 // any as a temporary workaround
-const getMatches = async (req: any, res: any) => {
+const getAPI = async (req: any, res: any) => {
     try {
         const matchesFromCache = await client.get('matches');
 
@@ -20,7 +21,19 @@ const getMatches = async (req: any, res: any) => {
 
 }
 
+const getChatRooms = async (req: any, res: any) => {
+    try {
+        const chatRooms = await ChatRoom.find({});
 
-export const chatController = {
-    getMatches
+        res.send(chatRooms)
+    } catch (error) {
+        console.error({ error })
+    }
+
+}
+
+
+export const chatRoomController = {
+    getAPI,
+    getChatRooms
 }

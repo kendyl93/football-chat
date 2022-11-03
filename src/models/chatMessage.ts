@@ -8,7 +8,8 @@ interface IChatMessage {
 const chatMessageSchema = new Schema<IChatMessage>({
   name: { type: String, required: true },
   message: { type: String, required: true },
-  createdAt: { type: Number, default: Date.now() }
+  createdAt: { type: Number, default: Date.now() },
+  matchId: { type: Schema.Types.ObjectId, ref: 'ChatRoom', required: true }
 });
 
 const ChatMessage = model<IChatMessage>('ChatMessage', chatMessageSchema)
