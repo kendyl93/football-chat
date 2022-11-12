@@ -4,9 +4,11 @@ import { json, urlencoded } from 'body-parser';
 import { initServer } from './server/init'
 import { dbString, dbOptions } from './database/constants'
 import { initRoutes } from './routes'
+import cors from 'cors';
 
 const app = express()
 
+app.use(cors()) // TODO make it more secure
 app.use(urlencoded({ extended: false }))
 app.use(json())
 

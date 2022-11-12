@@ -4,6 +4,7 @@ import { client } from '../../server/init'
 // any as a temporary workaround
 const getAPI = async (req: any, res: any) => {
     try {
+        console.log('TAKING API')
         const matchesFromCache = await client.get('matches');
 
         // const unfinishedMatches = matchesFromCache && getUnfinishedMatches(JSON.parse(matchesFromCache)?.matches)
