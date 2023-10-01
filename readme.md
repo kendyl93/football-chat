@@ -30,6 +30,7 @@ You need to have redis installed first(maxOS `brew install redis`).
 
 # TODO
 
+- Save database messages/rooms and do not erase it on every server visit
 - connect jenkins and push to the server
 - flow - Create chat ROOM in the db and connect users to it. Then send messages like [{ userName: string, message: 'string'}]
 - invastigate how to connect db with socket chat
