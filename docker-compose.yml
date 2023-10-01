@@ -10,7 +10,8 @@ services:
       - .:/usr/src/app
     command: npm run start:dev
     ports:
-      - "4001:4001"
+      - "4001:4001" # api
+      - "3025:3025" # socket
     environment:
       - NODE_ENV=$NODE_ENV
       - DB_HOST=$DB_HOST
@@ -20,6 +21,8 @@ services:
       - DB_PORT=$DB_PORT
       - DB_LOCAL_PORT=$DB_LOCAL_PORT
       - SERVER_PORT=$SERVER_PORT
+      - SOCKET_PORT=$SOCKET_PORT
+      - CLIENT_URL=$CLIENT_URL
   mongo:
     image: mongo:6.0
     env_file: ./.env

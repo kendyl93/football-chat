@@ -7,6 +7,7 @@ COPY package*.json \
     /usr/src/app/
 
 EXPOSE 4001
+EXPOSE 3025
 
 FROM base as production
 ENV NODE_ENV=production

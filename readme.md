@@ -1,3 +1,7 @@
+# Start the app
+
+`docker-compose up`
+
 # Docker
 
 - `docker build -t [name] .` - build image with name
@@ -20,6 +24,9 @@ Run mongo locally:
 5. `mongo` - Enter inside mongo shell
 
 STOP DB: `brew services stop mongodb-community`
+
+# Redis
+You need to have redis installed first(maxOS `brew install redis`).
 
 # TODO
 

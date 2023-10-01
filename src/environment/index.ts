@@ -8,6 +8,8 @@ export const ENVIRONMENT: ENV = {
     DB_PASSWORD: process.env.DB_PASSWORD as string,
     DB_PORT: process.env.DB_PORT as string,
     SERVER_PORT: process.env.SERVER_PORT as string,
+    SOCKET_PORT: process.env.SOCKET_PORT as string,
+    CLIENT_URL: process.env.CLIENT_URL as string,
     FOOTBALL_DATA_API_TOKEN: process.env.FOOTBALL_DATA_API_TOKEN as string,
     REDIS_URL: process.env.REDIS_URL as string,
     FOOTBALL_API_DATA_URL: process.env.FOOTBALL_API_DATA_URL as string
