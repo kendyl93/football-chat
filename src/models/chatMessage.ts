@@ -1,15 +1,18 @@
 import mongoose, { model, Schema } from 'mongoose'
 
 interface IChatMessage {
-  name: string;
+  senderId: string;
+  senderName: string;
   message: string;
+  roomId: any;
 }
 
 const chatMessageSchema = new Schema<IChatMessage>({
-  name: { type: String, required: true },
+  senderId: { type: String, required: true },
+  senderName: { type: String, required: true },
   message: { type: String, required: true },
   createdAt: { type: Number, default: Date.now() },
-  matchId: { type: Schema.Types.ObjectId, ref: 'ChatRoom', required: true }
+  roomId: { type: Schema.Types.ObjectId, ref: 'ChatRoom', required: true }
 });
 
 const ChatMessage = model<IChatMessage>('ChatMessage', chatMessageSchema)

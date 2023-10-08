@@ -6,6 +6,7 @@ interface IChatRoom {
   name: string;
   matchId: number;
   expireAt: Date;
+  messages: any;
 }
 
 const chatRoomSchema = new Schema<IChatRoom>({
@@ -15,7 +16,8 @@ const chatRoomSchema = new Schema<IChatRoom>({
     type: Date,
     expires: ONE_HOUR_IN_SEDCONDS,
     default: Date.now
-  }
+  },
+  messages: [{ type: Schema.Types.ObjectId, ref: 'ChatMessage' }]
 });
 
 const ChatRoom = model<IChatRoom>('ChatRoom', chatRoomSchema)
