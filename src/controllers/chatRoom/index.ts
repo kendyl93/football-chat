@@ -25,7 +25,7 @@ const getAPI = async (req: any, res: any) => {
 const getChatRooms = async (req: any, res: any) => {
     try {
         const chatRooms = await ChatRoom.find({});
-
+        console.log({ chatRooms })
         res.send(chatRooms)
     } catch (error) {
         console.error({ error })

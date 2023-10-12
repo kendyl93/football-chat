@@ -43,8 +43,23 @@ const postMessage = async (req: any, res: any) => {
 }
 
 const getMessage = async (req: any, res: any): Promise<void> => {
-    const messages = await ChatMessage.find({});
-    res.send(messages)
+    try {
+
+        console.log({ req })
+        const roomId = req.params.roomId;
+        // Find the ChatRoom by roomId
+        const chatRoom = await ChatRoom.findOne({ matchId: roomId });
+        if (!chatRoom) {
+            return res.status(404).send('ChatRoom not found');
+        }
+
+        // Retrieve all related ChatMessages using populate
+        const messages = await ChatMessage.find({ roomId: chatRoom._id }).populate('roomId');
+
+        res.send(messages);
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 

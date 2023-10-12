@@ -1,23 +1,46 @@
-import mongoose, { model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
-const ONE_HOUR_IN_SEDCONDS = 3600;
+const TWO_HOURS_IN_MILISEDCONDS = 1000 * 60 * 2;
+
+export enum MATCH_STATUS {
+  SCHEDULED = 'SCHEDULED',
+  TIMED = 'TIMED',
+  IN_PLAY = 'IN_PLAY',
+  PAUSED = 'PAUSED',
+  FINISHED = 'FINISHED',
+  SUSPENDED = 'SUSPENDED',
+  POSTPONED = 'POSTPONED',
+  CANCELLED = 'CANCELLED',
+  AWARDED = 'AWARDED'
+
+}
 
 interface IChatRoom {
-  name: string;
+  homeTeam: any;
+  awayTeam: any;
   matchId: number;
+  status: MATCH_STATUS;
+  utcStartDate: string;
   expireAt: Date;
   messages: any;
 }
 
 const chatRoomSchema = new Schema<IChatRoom>({
-  teams: { type: String, required: true },
+  homeTeam: { type: Object, required: true },
+  awayTeam: { type: Object, required: true },
   matchId: { type: Number, required: true },
-  expireAt: {
-    type: Date,
-    expires: ONE_HOUR_IN_SEDCONDS,
-    default: Date.now
-  },
+  status: { type: MATCH_STATUS, required: true }, // update type to enum
+  utcStartDate: { type: String, required: true },
+  expireAt: { type: Date, expires: TWO_HOURS_IN_MILISEDCONDS },
   messages: [{ type: Schema.Types.ObjectId, ref: 'ChatMessage' }]
+});
+
+chatRoomSchema.pre('save', function (next: any) {
+  if (this.isModified('status') && this.status === MATCH_STATUS.FINISHED) {
+    this.expireAt = new Date(Date.now());
+  }
+
+  next();
 });
 
 const ChatRoom = model<IChatRoom>('ChatRoom', chatRoomSchema)

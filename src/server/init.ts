@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { ENVIRONMENT } from '../environment'
 import { createClient } from 'redis'
-import { ChatRoom } from '../models/chatRoom';
+import { ChatRoom, MATCH_STATUS } from '../models/chatRoom';
 import { postOrDeleteMatches } from '../controllers/api'
 
 export const client = createClient({ url: ENVIRONMENT.REDIS_URL });
@@ -39,17 +39,25 @@ const getAPIData = async () => {
 
                 // Create documents if not exist
                 response.data?.matches?.map(async (match: any) => {
-                    const chatRoom = new ChatRoom({ matchId: match.id, teams: `${match.homeTeam.name} - ${match.awayTeam.name}` });
 
                     const query = { matchId: match.id };
-                    const matchExist = await ChatRoom.exists(query);
+                    const matchExists = await ChatRoom.exists(query);
 
-                    if (!matchExist) {
-                        chatRoom.save().then(() => console.log('ChatRoom created: ', JSON.stringify(chatRoom))).catch(err => console.log(err));
+                    if (!matchExists) {
+                        const chatRoom = new ChatRoom({ matchId: match.id, homeTeam: match.homeTeam, awayTeam: match.awayTeam, utcStartDate: match.utcDate, status: match.status });
+
+                        if (chatRoom.status !== MATCH_STATUS.FINISHED) {
+                            chatRoom.save().then(() => console.log('ChatRoom created: ', JSON.stringify(chatRoom))).catch(err => console.log(err));
+                        }
+                    } else {
+                        const existingMatch = await ChatRoom.findOne(query)
+                        existingMatch?.set(match)
+
+                        await existingMatch?.save()
                     }
 
                 })
-                await postOrDeleteMatches(response.data?.matches)
+                // await postOrDeleteMatches(response.data?.matches)
                 console.log(`⚡️[redis]: set API data in cache`)
             } catch (error) {
                 console.log(`⚡️[redis]: Error setting API data in cache`)

@@ -1,10 +1,10 @@
-import mongoose, { model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
 interface IChatMessage {
   senderId: string;
   senderName: string;
   message: string;
-  roomId: any;
+  roomId: number;
 }
 
 const chatMessageSchema = new Schema<IChatMessage>({

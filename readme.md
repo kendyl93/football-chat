@@ -30,6 +30,8 @@ You need to have redis installed first(maxOS `brew install redis`).
 
 # TODO
 
+- Add cron job to check if there were any matches/rooms in the db that should be reomved. 
+- Add cron job to check if there were any messages that doesnt belong to any chat in the db that should be reomved. 
 - Save database messages/rooms and do not erase it on every server visit
 - connect jenkins and push to the server
 - flow - Create chat ROOM in the db and connect users to it. Then send messages like [{ userName: string, message: 'string'}]
