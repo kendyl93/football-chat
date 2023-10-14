@@ -10,6 +10,8 @@ import cors from 'cors';
 import { ENVIRONMENT } from './environment';
 import { ChatMessage } from './models/chatMessage';
 import { ChatRoom } from './models/chatRoom';
+import cron from 'node-cron';
+import { cleanupDatabase } from './database/cleanupDB';
 
 const app = express();
 
@@ -18,6 +20,13 @@ const io = (socketIo as any)(ENVIRONMENT.SOCKET_PORT, {
         origin: ENVIRONMENT.CLIENT_URL
     }
 }) //in case server and client run on different urls
+
+// '*/10 * * * * *' - every 10seconds to test
+// '0 2 * * *' Schedule the cleanup task to run at 2:00 AM every day
+// Schedule the database cleanup task to run every 10 seconds for testing
+cron.schedule('0 2 * * *', async () => {
+    await cleanupDatabase();
+});
 
 io.on("connection", (socket: any) => {
     console.log("⚡️[SOCKET] client connected: ", socket.id)

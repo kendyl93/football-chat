@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose'
 
-const TWO_HOURS_IN_MILISEDCONDS = 1000 * 60 * 2;
+export const HOURS_TO_EXPIRE = 2;
+const HOURS_IN_MILISEDCONDS = 1000 * 60 * HOURS_TO_EXPIRE;
 
 export enum MATCH_STATUS {
   SCHEDULED = 'SCHEDULED',
@@ -30,8 +31,8 @@ const chatRoomSchema = new Schema<IChatRoom>({
   awayTeam: { type: Object, required: true },
   matchId: { type: Number, required: true },
   status: { type: MATCH_STATUS, required: true }, // update type to enum
-  utcStartDate: { type: String, required: true },
-  expireAt: { type: Date, expires: TWO_HOURS_IN_MILISEDCONDS },
+  utcStartDate: { type: Date, required: true },
+  expireAt: { type: Date, expires: HOURS_IN_MILISEDCONDS },
   messages: [{ type: Schema.Types.ObjectId, ref: 'ChatMessage' }]
 });
 

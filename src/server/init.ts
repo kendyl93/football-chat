@@ -44,7 +44,7 @@ const getAPIData = async () => {
                     const matchExists = await ChatRoom.exists(query);
 
                     if (!matchExists) {
-                        const chatRoom = new ChatRoom({ matchId: match.id, homeTeam: match.homeTeam, awayTeam: match.awayTeam, utcStartDate: match.utcDate, status: match.status });
+                        const chatRoom = new ChatRoom({ matchId: match.id, homeTeam: match.homeTeam, awayTeam: match.awayTeam, utcStartDate: new Date(match.utcDate), status: match.status });
 
                         if (chatRoom.status !== MATCH_STATUS.FINISHED) {
                             chatRoom.save().then(() => console.log('ChatRoom created: ', JSON.stringify(chatRoom))).catch(err => console.log(err));
