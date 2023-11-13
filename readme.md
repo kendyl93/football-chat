@@ -27,6 +27,9 @@ STOP DB: `brew services stop mongodb-community`
 
 # Redis
 You need to have redis installed first(maxOS `brew install redis`).
+1. Connect to redis: `redis-cli -h 127.0.0.1 -p 6379`
+2. Display all keys: `keys *`
+3. display specific key `get [key name]`
 
 # TODO
 
