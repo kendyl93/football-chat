@@ -27,4 +27,5 @@ jobs:
           echo SOCKET_PORT=${{ secrets.SOCKET_PORT }} >> .env
           echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
       - run: |
+          whoami
           docker-compose up
