@@ -16,7 +16,7 @@ jobs:
         run: |
           touch .env
           echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
-          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+          "DB_HOST=${{ secrets.DB_HOST }}" >> .env
           echo DB_NAME=${{ secrets.DB_NAME }} >> .env
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
           echo DB_LOCAL_PORT=${{ secrets.DB_LOCAL_PORT }} >> .env
