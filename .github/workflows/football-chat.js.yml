@@ -27,7 +27,5 @@ jobs:
           echo SOCKET_PORT=${{ secrets.SOCKET_PORT }} >> .env
           echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
       - run: |
-          echo $DB_LOCAL_PORT
-          echo $DB_PORT
           docker-compose -v
           docker-compose up
