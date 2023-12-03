@@ -38,17 +38,23 @@ const createChatRoom = (match: Match) => {
   chatRoom
     .save()
     .then(() => console.log("ChatRoom created: ", JSON.stringify(chatRoom)))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.error("[createChatRoom]:", err);
+    });
 };
 
 const findAndUpdateIfExist = async (
   query: MatchQuery,
   match: Match
 ): Promise<void> => {
-  const existingMatch = await ChatRoom.findOne(query);
-  existingMatch?.set(match);
+  try {
+    const existingMatch = await ChatRoom.findOne(query);
+    existingMatch?.set(match);
 
-  await existingMatch?.save();
+    await existingMatch?.save();
+  } catch (error) {
+    console.error("[findAndUpdateIfExist]", error);
+  }
 };
 
 const mapMatchesAndSaveOrUpdateDb = async (matches: Match[]) => {
