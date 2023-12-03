@@ -17,4 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: docker-compose up
+      - run: |
+          docker-compose -v
+          docker-compose up
