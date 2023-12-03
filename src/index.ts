@@ -82,6 +82,7 @@ app.use(json());
 initRoutes(app);
 
 mongoose.connect(dbString, dbOptions, async (error) => {
+  console.log({ ENV: JSON.stringify({ ENV: process.env }) });
   console.log(`[DB]: ${dbString}`);
   if (!error) {
     await initServer(app);
