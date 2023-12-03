@@ -27,7 +27,7 @@ services:
     image: mongo:6.0
     env_file: ./.env
     ports:
-      - DB_LOCAL_PORT:$DB_PORT
+      - 27017:$DB_PORT
     # environment:
     # - MONGO_INITDB_ROOT_USERNAME=$DB_USER
     # - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
