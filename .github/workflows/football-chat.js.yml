@@ -25,6 +25,7 @@ jobs:
           echo FOOTBALL_API_DATA_URL=${{ secrets.FOOTBALL_API_DATA_URL }} >> .env
           echo FOOTBALL_DATA_API_TOKEN=${{ secrets.FOOTBALL_DATA_API_TOKEN }} >> .env
           echo SOCKET_PORT=${{ secrets.SOCKET_PORT }} >> .env
+          echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
       - run: |
           docker-compose -v
           docker-compose up
