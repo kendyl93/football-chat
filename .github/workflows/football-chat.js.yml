@@ -12,20 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: create env file
+      - name: "Create env file"
         run: |
-          touch .env
-          echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
-          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
-          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
-          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-          echo DB_LOCAL_PORT=${{ secrets.DB_LOCAL_PORT }} >> .env
-          echo SERVER_PORT=${{ secrets.SERVER_PORT }} >> .env
-          echo REDIS_URL=${{ secrets.REDIS_URL }} >> .env
-          echo FOOTBALL_API_DATA_URL=${{ secrets.FOOTBALL_API_DATA_URL }} >> .env
-          echo FOOTBALL_DATA_API_TOKEN=${{ secrets.FOOTBALL_DATA_API_TOKEN }} >> .env
-          echo SOCKET_PORT=${{ secrets.SOCKET_PORT }} >> .env
-          echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
+          echo "${{ secrets.ENV_FILE }}" > .env
       - run: |
           echo $DB_LOCAL_PORT
           echo $DB_PORT
